@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>个人记账模板 - 月预算/支出追踪/年度汇总 | ToolBox Pro</title>
+<meta name="description" content="专业的个人记账和预算管理模板，含月度预算、支出分类追踪、年度汇总报表。支持Excel/Google Sheets/WPS，即买即用。">
+<link rel="canonical" href="https://dingpeng29.github.io/budget-tracker/">
+<style>
+:root{--bg:#f8fafc;--card:#fff;--text:#1e293b;--sub:#64748b;--border:#e2e8f0;--blue:#2563eb;--green:#10b981;--radius:12px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Microsoft YaHei','PingFang SC',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.topbar .logo{font-size:18px;font-weight:800;text-decoration:none;color:var(--text);}
+.topbar .nav a{font-size:13px;color:var(--sub);text-decoration:none;padding:6px 12px;border-radius:6px;}
+.topbar .nav a:hover{background:var(--bg);}
+.container{max-width:900px;margin:0 auto;padding:24px 20px;}
+.hero{text-align:center;padding:40px 20px;background:linear-gradient(135deg,#064e3b,#065f46);color:#fff;border-radius:var(--radius);margin-bottom:24px;}
+.hero .badge{display:inline-block;background:#f59e0b;color:#1e293b;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:800;margin-bottom:12px;}
+.hero h1{font-size:30px;font-weight:800;margin-bottom:8px;}
+.hero p{font-size:15px;color:#a7f3d0;margin-bottom:20px;}
+.hero .price{font-size:42px;font-weight:800;color:#fbbf24;}
+.hero .price .orig{font-size:20px;color:#6ee7b7;text-decoration:line-through;margin-right:10px;}
+.hero .btn{display:inline-block;background:#f59e0b;color:#1e293b;padding:14px 40px;border-radius:50px;font-size:16px;font-weight:800;text-decoration:none;margin-top:16px;transition:all .2s;}
+.hero .btn:hover{background:#fbbf24;transform:translateY(-2px);}
+.stats{display:flex;justify-content:center;gap:32px;margin-top:20px;flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat .num{font-size:24px;font-weight:800;color:#fff;}
+.stat .lbl{font-size:12px;color:#a7f3d0;}
+.section{margin-bottom:24px;}
+.section h2{font-size:20px;font-weight:800;margin-bottom:16px;}
+.template-preview{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:16px;}
+.tpreview{background:var(--card);border-radius:var(--radius);padding:20px;border:1px solid var(--border);text-align:center;}
+.tpreview .icon{font-size:32px;margin-bottom:8px;}
+.tpreview h3{font-size:15px;font-weight:700;margin-bottom:4px;}
+.tpreview p{font-size:12px;color:var(--sub);}
+.feature-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.feature-item{display:flex;align-items:flex-start;gap:10px;padding:12px;background:var(--card);border-radius:10px;border:1px solid var(--border);font-size:13px;}
+.feature-item .fi{font-size:20px;flex-shrink:0;}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+.compare-card{padding:20px;border-radius:var(--radius);border:2px solid var(--border);}
+.compare-card.free{background:#fff;}
+.compare-card.pro{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-color:var(--green);position:relative;}
+.compare-card.pro::after{content:"推荐";position:absolute;top:-10px;right:16px;background:var(--green);color:#fff;padding:2px 12px;border-radius:10px;font-size:11px;font-weight:700;}
+.compare-card h3{font-size:16px;margin-bottom:12px;}
+.compare-card ul{list-style:none;padding:0;font-size:13px;}
+.compare-card li{margin-bottom:6px;}
+.compare-card li.yes::before{content:"✅ ";}
+.compare-card li.no::before{content:"❌ ";}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:8px;}
+.faq-item h4{font-size:14px;margin-bottom:4px;}
+.faq-item p{font-size:13px;color:var(--sub);}
+.cta-bottom{text-align:center;padding:32px;background:linear-gradient(135deg,#064e3b,#065f46);color:#fff;border-radius:var(--radius);}
+.cta-bottom h2{color:#fff;}
+.cta-bottom .btn{display:inline-block;background:#f59e0b;color:#1e293b;padding:14px 40px;border-radius:50px;font-size:16px;font-weight:800;text-decoration:none;margin-top:12px;}
+.cta-bottom .btn:hover{background:#fbbf24;}
+.powered{text-align:center;padding:24px;color:var(--sub);font-size:12px;border-top:1px solid var(--border);margin-top:32px;}
+.powered a{color:var(--blue);text-decoration:none;}
+@media(max-width:640px){.feature-list,.compare{grid-template-columns:1fr;}.hero h1{font-size:24px;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+<a class="logo" href="/">💰 ToolBox Pro</a>
+<div class="nav">
+<a href="/">🏠 工具箱</a>
+<a href="/prompt-pack/">提示词包</a>
+<a href="/resume-templates/">简历模板</a>
+</div>
+</div>
+
+<div class="container">
+<div class="hero">
+<div class="badge">🔥 限时特惠</div>
+<h1>个人记账模板 · 管好每一笔钱</h1>
+<p>3套专业记账模板：月度预算 + 支出追踪 + 年度汇总<br>支持 Excel / WPS / Google Sheets，即买即用</p>
+<div class="price-block"><span class="price"><span class="orig">¥39.9</span>¥19.9</span></div>
+<a class="btn" href="https://afdian.com/a/toolboxpro" target="_blank">立即购买 →</a>
+<div class="stats">
+<div class="stat"><div class="num">3</div><div class="lbl">核心模板</div></div>
+<div class="stat"><div class="num">12</div><div class="lbl">月预算表</div></div>
+<div class="stat"><div class="num">6</div><div class="lbl">支出分类</div></div>
+<div class="stat"><div class="num">永久</div><div class="lbl">免费更新</div></div>
+</div>
+</div>
+
+<div class="section">
+<h2>📊 模板预览</h2>
+<div class="template-preview">
+<div class="tpreview"><div class="icon">📅</div><h3>月度预算表</h3><p>12个月独立工作表，收入/支出/结余一目了然，自动计算公式</p></div>
+<div class="tpreview"><div class="icon">🏷️</div><h3>支出分类追踪</h3><p>6大分类（餐饮/住房/交通/购物/娱乐/其他），饼图自动生成</p></div>
+<div class="tpreview"><div class="icon">📈</div><h3>年度汇总报表</h3><p>全年数据自动汇总，月度对比趋势图，收支结构一目了然</p></div>
+</div>
+</div>
+
+<div class="section">
+<h2>✅ 模板功能</h2>
+<div class="feature-list">
+<div class="feature-item"><span class="fi">🤖</span><div><b>自动计算</b><p style="font-size:12px;color:var(--sub);">填入数字，余额/汇总/占比全自动计算，零公式基础也能用</p></div></div>
+<div class="feature-item"><span class="fi">📊</span><div><b>可视化图表</b><p style="font-size:12px;color:var(--sub);">饼图展示支出结构，折线图追踪月度趋势</p></div></div>
+<div class="feature-item"><span class="fi">📱</span><div><b>多平台兼容</b><p style="font-size:12px;color:var(--sub);">Excel / WPS / Google Sheets / Numbers 全兼容</p></div></div>
+<div class="feature-item"><span class="fi">🎨</span><div><b>精美设计</b><p style="font-size:12px;color:var(--sub);">配色舒适，打印友好，手机查看也清晰</p></div></div>
+<div class="feature-item"><span class="fi">📝</span><div><b>使用指南</b><p style="font-size:12px;color:var(--sub);">详细图文教程+记账小技巧，5分钟上手</p></div></div>
+<div class="feature-item"><span class="fi">🔄</span><div><b>永久更新</b><p style="font-size:12px;color:var(--sub);">一次购买，模板改进和新增永久免费获取</p></div></div>
+</div>
+</div>
+
+<div class="section">
+<h2>⚡ 自己记账 vs 用模板</h2>
+<div class="compare">
+<div class="compare-card free"><h3>📓 自己从零做</h3><ul>
+<li class="no">花2-3小时设计表格结构</li><li class="no">公式容易写错（SUM/VLOOKUP)</li><li class="no">不知道什么分类合理</li><li class="no">图表需要自己调样式</li><li class="no">换软件可能不兼容</li></ul></div>
+<div class="compare-card pro"><h3>💎 用我们的模板 ¥19.9</h3><ul>
+<li class="yes">打开即用，5分钟开始记账</li><li class="yes">所有公式已验证无误</li><li class="yes">6大科学分类，覆盖95%支出</li><li class="yes">图表自动生成，配色专业</li><li class="yes">Excel/WPS/Sheets/Numbers全兼容</li></ul></div>
+</div>
+</div>
+
+<div class="section">
+<h2>❓ 常见问题</h2>
+<div class="faq-item"><h4>适合什么人群？</h4><p>想开始记账但不知道从何下手的上班族、想控制消费的学生、想理清家庭支出的家庭用户。模板从基础到进阶都有覆盖。</p></div>
+<div class="faq-item"><h4>用什么软件打开？</h4><p>支持 Microsoft Excel (2007+)、WPS表格、Google Sheets、Apple Numbers。推荐使用Excel或WPS获得完整体验。</p></div>
+<div class="faq-item"><h4>不会Excel公式能用吗？</h4><p>完全没问题。所有公式已预设好，你只需要填入数字，汇总和图表自动生成。附详细图文教程。</p></div>
+<div class="faq-item"><h4>购买后如何获取？</h4><p>在爱发电完成支付后自动获得下载链接（GitHub Release），包含Excel模板文件(.xlsx) + CSV通用格式 + 使用指南PDF。</p></div>
+</div>
+
+<div class="cta-bottom">
+<h2>从今天开始，对自己的钱有数</h2>
+<p style="color:#a7f3d0;margin:8px 0;">记账不是为了限制消费，而是为了更有底气地花每一笔</p>
+<div style="font-size:32px;font-weight:800;color:#fbbf24;margin:12px 0;">¥19.9 <span style="font-size:16px;color:#6ee7b7;text-decoration:line-through;">¥39.9</span></div>
+<a class="btn" href="https://afdian.com/a/toolboxpro" target="_blank">立即购买 →</a>
+</div>
+</div>
+
+<div class="powered">
+由 <a href="/">ToolBox Pro</a> 提供 ·
+<a href="/prompt-pack/">AI提示词高级版</a> ·
+<a href="/resume-templates/">精品简历模板</a>
+</div>
+</body>
+</html>
